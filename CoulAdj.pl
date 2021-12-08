@@ -127,3 +127,10 @@ is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
 
 % Looks better?!
 % ?- setof(adjacency(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies).
+% Looks better, but it's not sorting the atoms
+
+% Might sort correctly, but output isn't shown:
+% ?- setof([Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies).
+
+% Donne des résultats vérifiables:
+% ?- setof([Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies), maplist(portray_clause, AllAdjacencies).
