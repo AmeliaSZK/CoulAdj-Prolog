@@ -44,10 +44,16 @@ work on the project:
 ## Ubuntu
 1. Open the repo in Visual Studio Code
 1. Open an integrated terminal in Visual Studio Code
-1. In this terminal, run the command `swi-prolog.swipl CoulAdj.pl`
+1. In this terminal, run the command `swi-prolog.swipl`.
+Do NOT use `swi-prolog.swipl CoulAdj.pl`
+1. In swi-prolog start with these 2 queries, in this
+specific order:
+```Prolog
+?- use_module(library(clpfd)).
+?- consult("CoulAdj.pl").
+```
 
-By specifying `CoulAdj.pl` in argument, SWI-Prolog will consult the
-file on launch. Use this command in SWI-Prolog to reconsult files
+Use this command in SWI-Prolog to reconsult files
 that changed:
 
 ```Prolog

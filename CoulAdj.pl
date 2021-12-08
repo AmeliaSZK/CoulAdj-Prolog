@@ -30,3 +30,9 @@ pixel(    5,   2, 210,  20,  30, 246).
 pixel(    5,   3,  10,  20, 230, 252).
 pixel(    5,   4, 210,  20, 230, 244).
 
+% In the swi-prolog...
+% This works as expected:
+% ?- pixel(R1, C1, _, _, _, Al1), pixel(R2, C2, _, _, _, Al2), \+ Al1 #= Al2, R1 #= R2, C2 #= C1+1.
+
+
+
