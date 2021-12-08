@@ -90,3 +90,20 @@ is_neigh(R1, C1, R2, C2) :-
 % ?- pixel(R1, C1, Red1,Gre1,Blu1,Al1), pixel(R2, C2,Red2,Gre2,Blu2,Al2), \+ same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), is_neigh(R1,C1,R2,C2).
 
 
+is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
+    pixel(R1, C1, Red1, Gre1, Blu1, Alp1),
+    pixel(R2, C2, Red2, Gre2, Blu2, Alp2),
+    \+ same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2),
+    is_neigh(R1, C1, R2, C2).
+
+% Works!!!
+% ?- is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2).
+
+% Seems to work?
+% ?- bagof(adjacency(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies).
+
+% ?- bagof([Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies).
+% AllAdjacencies = [[210, 220, 30, 242, 210, 20, 230, 244], [210, 220, 30, 242, 210, 20, 230|...], [210, 20, 230, 244, 210, 220|...], [210, 20, 230, 244, 210|...], [210, 20, 30, 246|...], [210, 20, 30|...], [210, 220|...], [210|...], [...|...]|...].
+
+% Looks better?!
+% ?- setof(adjacency(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies).
