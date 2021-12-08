@@ -54,6 +54,22 @@ same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
 % ?- pixel(R1, C1, Red1,Gre1,Blu1,Al1), pixel(R2, C2,Red2,Gre2,Blu2,Al2), \+ same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), R1 #= R2, C2 #= C1+1.
 
 
+is_topLeft(R1, C1, R2, C2) :-
+    R2 #= R1 - 1,
+    C2 #= C1 - 1.
+
+is_topCent(R1, C1, R2, C2) :-
+    R2 #= R1 - 1,
+    C2 #= C1.
+
+is_topRigh(R1, C1, R2, C2) :-
+    R2 #= R1 - 1,
+    C2 #= C1 + 1.
+
+is_midLeft(R1, C1, R2, C2) :-
+    R2 #= R1,
+    C2 #= C1 - 1.
+
 is_midRigh(R1, C1, R2, C2) :-
     R2 #= R1,
     C2 #= C1 + 1.
@@ -81,6 +97,10 @@ is_neighbour(R1, C1, R2, C2) :-
 % ?- pixel(R1, C1, Red1,Gre1,Blu1,Al1), pixel(R2, C2,Red2,Gre2,Blu2,Al2), \+ same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), is_neighbour(R1,C1,R2,C2).
 
 is_neigh(R1, C1, R2, C2) :-
+    is_topLeft(R1, C1, R2, C2);
+    is_topCent(R1, C1, R2, C2);
+    is_topRigh(R1, C1, R2, C2);
+    is_midLeft(R1, C1, R2, C2);
     is_midRigh(R1, C1, R2, C2);
     is_botLeft(R1, C1, R2, C2);
     is_botCent(R1, C1, R2, C2);
