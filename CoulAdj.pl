@@ -12,10 +12,10 @@ main :-
     print_TSV_file(TSV_filename, AllAdjacencies).
 
 is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
-    pixel(R1, C1, Red1, Gre1, Blu1, Alp1),
-    pixel(R2, C2, Red2, Gre2, Blu2, Alp2),
+    pixel(Row1, Col1, Red1, Gre1, Blu1, Alp1),
+    pixel(Row2, Col2, Red2, Gre2, Blu2, Alp2),
     \+ same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2),
-    is_neighbour(R1, C1, R2, C2).
+    is_neighbour(Row1, Col1, Row2, Col2).
 
 same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
     Red1 #= Red2,
