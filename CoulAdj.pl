@@ -150,3 +150,6 @@ print_TSV_file(Filename, AllAdjacencies) :-
     writef('%w\t%w\t%w\t%w\t%w\t%w\t%w\t%w\n', Header),
     maplist(print_TSV_row, AllAdjacencies),
     told.
+
+% Gives the correct TSV output!! :
+% ?- setof([Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies), print_TSV_file('result-size-p.tsv', AllAdjacencies).
