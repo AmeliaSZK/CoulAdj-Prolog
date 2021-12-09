@@ -1,3 +1,5 @@
+:- use_module(library(clpfd)).
+
 % pixel(Row, Col, Red, Gre, Blu, Alp)
 pixel(    0,   0, 210, 220,  30, 242).
 pixel(    0,   1, 210, 220,  30, 242).
@@ -141,7 +143,7 @@ is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
 % A hack because format('~w\t~w\t~w\t~w\t~w\t~w\t~w\t~w~n'), AllAdjacencies)
 %   REFUSES to print actual tabs, instead of spaces!!!!!!!
 print_TSV_row(OneAdjacency) :-
-    OneAdjacency = [Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2],
+    OneAdjacency = [_Red1, _Gre1, _Blu1, _Alp1, _Red2, _Gre2, _Blu2, _Alp2],
     writef('%w\t%w\t%w\t%w\t%w\t%w\t%w\t%w\n',OneAdjacency).
 
 print_TSV_file(Filename, AllAdjacencies) :-
