@@ -111,17 +111,12 @@ is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
 % Prints the content with a space instead of a tab
 % ?- setof([Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies), maplist(format('~w ~w ~w ~w ~w ~w ~w ~w ~n'), AllAdjacencies).
 
-% A hack because format('~w\t~w\t~w\t~w\t~w\t~w\t~w\t~w~n'), AllAdjacencies)
-%   REFUSES to print actual tabs, instead of spaces!!!!!!!
-print_TSV_row(OneAdjacency) :-
-    OneAdjacency = [_Red1, _Gre1, _Blu1, _Alp1, _Red2, _Gre2, _Blu2, _Alp2],
-    writef('%w\t%w\t%w\t%w\t%w\t%w\t%w\t%w\n',OneAdjacency).
 
 print_TSV_file(Filename, AllAdjacencies) :-
     Header = ['r', 'g', 'b', 'a', 'adj_r', 'adj_g', 'adj_b', 'adj_a'],
     tell(Filename),
     writef('%w\t%w\t%w\t%w\t%w\t%w\t%w\t%w\n', Header),
-    maplist(print_TSV_row, AllAdjacencies),
+    maplist(format('~w\t~w\t~w\t~w\t~w\t~w\t~w\t~w~n'), AllAdjacencies),
     told.
 
 % Gives the correct TSV output!! :
