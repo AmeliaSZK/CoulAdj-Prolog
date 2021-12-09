@@ -1,8 +1,8 @@
-:- initialization(main, main).
+:- initialization(coulAdj, main).
 
 :- use_module(library(clpfd)).
 
-main :- 
+coulAdj :- 
     current_prolog_flag(argv, [TSV_filename]),
     setof(
         [Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], 
