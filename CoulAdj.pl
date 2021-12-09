@@ -2,13 +2,6 @@
 
 :- use_module(library(clpfd)).
 
-
-diff_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
-    Red1 #\= Red2 ;
-    Gre1 #\= Gre2 ;
-    Blu1 #\= Blu2 ;
-    Alp1 #\= Alp2.
-
 same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
     Red1 #= Red2,
     Gre1 #= Gre2,
