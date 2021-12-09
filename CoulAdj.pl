@@ -1,36 +1,7 @@
+:- initialization(main, main).
+
 :- use_module(library(clpfd)).
 
-% pixel(Row, Col, Red, Gre, Blu, Alp)
-pixel(    0,   0, 210, 220,  30, 242).
-pixel(    0,   1, 210, 220,  30, 242).
-pixel(    0,   2, 210,  20, 230, 244).
-pixel(    0,   3, 210,  20, 230, 244).
-pixel(    0,   4, 210,  20,  30, 246).
-pixel(    1,   0, 210, 220,  30, 242).
-pixel(    1,   1, 210, 220,  30, 242).
-pixel(    1,   2, 210,  20, 230, 244).
-pixel(    1,   3, 210,  20, 230, 244).
-pixel(    1,   4, 210,  20, 230, 244).
-pixel(    2,   0, 210, 220,  30, 242).
-pixel(    2,   1, 210, 220,  30, 242).
-pixel(    2,   2,  10, 220, 230, 248).
-pixel(    2,   3,  10, 220, 230, 248).
-pixel(    2,   4, 210,  20, 230, 244).
-pixel(    3,   0,  10, 220,  30, 250).
-pixel(    3,   1,  10, 220,  30, 250).
-pixel(    3,   2,  10,  20, 230, 252).
-pixel(    3,   3,  10,  20, 230, 252).
-pixel(    3,   4, 210,  20, 230, 244).
-pixel(    4,   0,  10, 220,  30, 250).
-pixel(    4,   1,  10, 220,  30, 250).
-pixel(    4,   2,  10,  20, 230, 252).
-pixel(    4,   3,  10,  20, 230, 252).
-pixel(    4,   4, 210,  20, 230, 244).
-pixel(    5,   0,  10, 220,  30, 250).
-pixel(    5,   1, 210,  20,  30, 246).
-pixel(    5,   2, 210,  20,  30, 246).
-pixel(    5,   3,  10,  20, 230, 252).
-pixel(    5,   4, 210,  20, 230, 244).
 
 % In the swi-prolog...
 % This works as expected:
@@ -154,4 +125,11 @@ print_TSV_file(Filename, AllAdjacencies) :-
     told.
 
 % Gives the correct TSV output!! :
-% ?- setof([Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), AllAdjacencies), print_TSV_file('result-size-p.tsv', AllAdjacencies).
+main :- 
+    current_prolog_flag(argv, [TSV_filename]),
+    setof(
+        [Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], 
+        is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), 
+        AllAdjacencies
+    ), 
+    print_TSV_file(TSV_filename, AllAdjacencies).

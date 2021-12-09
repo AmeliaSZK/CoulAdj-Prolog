@@ -38,13 +38,18 @@ swi-prolog.swipl-win
 The `swipl-win` will launch the GUI, and the other is for use in a
 terminal.
 
+To run non-interactively:
+```
+$ swi-prolog.swipl CoulAdj.pl pixel_values.pl results.tsv
+```
+
 At the time of writing, in early development, we use this procedure to
 work on the project:
 
 ## Ubuntu
 1. Open the repo in Visual Studio Code
 1. Open an integrated terminal in Visual Studio Code
-1. In this terminal, run the command `swi-prolog.swipl CoulAdj.pl`.
+1. In this terminal, run the command `swi-prolog.swipl CoulAdj.pl sample-size-p.pl`.
 
 Use this command in SWI-Prolog to reconsult files
 that changed:
