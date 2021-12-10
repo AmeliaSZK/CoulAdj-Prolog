@@ -34,6 +34,7 @@ def test_one_size(size):
     start = time.perf_counter()
     subprocess.run(
         [swi_prolog_executable, 
+        "-O",
         couladj_prolog, 
         pixels_path, 
         result_path]).check_returncode()
@@ -47,7 +48,7 @@ def test_one_size(size):
     correctness_msg = "Correct" if is_correct else "INCORRECT"
     print(f"{duration}", f"Size {size}", correctness_msg, f"{pixels_per_second} pixels/s", sep="\t")
 
-for size in [2]:
+for size in [1,2,4,8,16]:
     test_one_size(size)
 
 
