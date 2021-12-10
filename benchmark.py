@@ -48,7 +48,7 @@ def test_one_size(size):
     correctness_msg = "Correct" if is_correct else "INCORRECT"
     print(f"{duration}", f"Size {size}", correctness_msg, f"{pixels_per_second} pixels/s", sep="\t")
 
-for size in [1,2,4,8]:
+for size in [1,2,4,8,16]:
     test_one_size(size)
 
 
