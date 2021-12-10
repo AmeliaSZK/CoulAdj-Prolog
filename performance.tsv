@@ -1,0 +1,7 @@
+Duration (s)	Size	Processing Rate
+0.423	Size 1	170 pixels/s
+0.458	Size 2	629 pixels/s
+1.214	Size 4	949 pixels/s
+13.43	Size 8	343 pixels/s
+198.6	Size 16	93 pixels/s
+3070	Size 32	24 pixels/s

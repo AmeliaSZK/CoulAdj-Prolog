@@ -31,6 +31,10 @@ def test_one_size(size):
     pixels_path = os.path.join(pixels_directory, pixels_filename)
     result_path = os.path.join(result_directory, result_filename)
 
+    if not os.path.exists(pixels_path):
+        print(f"Data for size {size} is not in the repo; this file doesn't exist: {pixels_path}")
+        return
+
     start = time.perf_counter()
     subprocess.run(
         [swi_prolog_executable, 
@@ -48,7 +52,7 @@ def test_one_size(size):
     correctness_msg = "Correct" if is_correct else "INCORRECT"
     print(f"{duration}", f"Size {size}", correctness_msg, f"{pixels_per_second} pixels/s", sep="\t")
 
-for size in [1,2,4,8,16]:
+for size in [1,2,4,8]:
     test_one_size(size)
 
 
