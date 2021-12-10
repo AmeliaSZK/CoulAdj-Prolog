@@ -25,15 +25,67 @@ and documentation.
 # Known Requirements
 *   [SWI-Prolog](https://www.swi-prolog.org/)
 *   Python 3
-*   Linux (probably)
 
-# Initial Development Setup
+# How to run
+
+General procedure to run non-interactively:
+```
+$ swi-prolog.swipl CoulAdj.pl pixel_values.pl results.tsv
+```
+The file `pixel_values.pl` must contain Prolog "facts" in a specific format.
+This format is describe in the first line of each existing file.
+(I know this isn't much documentation, but sample files have already been made,
+and this project is still in active development, so this area of the
+specification is still highly volatile)
+
+To run a quick test of correctness:
+```
+$ swi-prolog.swipl CoulAdj.pl tests/knowledge-bases/pixels-size-p.pl tests/results/result-size-p.tsv
+```
+After running this command, check with git if there was a change in `tests/results/result-size-p.tsv`.
+If the file is still the same, your results should be correct.
+(I say "should", because this is just a quick test, and I'm only documenting
+it because right now, the Python script to (only) check correctness isn't even written.)
+
+## Benchmarks
+In order to run the benchmark script, `benchmark.py`, go look at its source,
+at the top of the file, and make sure that the variable `swi_prolog_executable`
+points to the correct SWI-Prolog executable on your machine.
+
+How to run the benchmarks:
+```
+$ python3 benchmark.py
+```
+At the time of writing, expect the full benchmark to take about *5 minutes*.
+Or maybe 10.
+
+You can reduce this to about 20 seconds by going in the python script (`benchmark.py`),
+at the bottom of the file, and removing the size 16 from the tested sizes.
+
+So, to reduce the benchmark duration to 20 seconds, this code:
+```Python
+for size in [1,2,4,8,16]:
+    test_one_size(size)
+```
+Needs to become this:
+```Python
+for size in [1,2,4,8]:
+    test_one_size(size)
+```
+
+Also, this change may have already been done, and I just haven't updated 
+the readme yet.
+
+
+
+# Acquisition of big test samples
+_As of now, the implementation is still quadratic, so we recommend
+that you do **not** acquire the bigger samples._
+
 This repo comes with several test samples in `tests/knowledge-bases` that are
 meant to profile the performance. The problem is that these files can get big.
-
 The files already included are those that are below 1 MB in size. 
 This section explains how to acquire all the other sizes.
-
 Acquiring these files is optional, as the benchmarking script was written
 with the assumptions that they may be missing.
 
@@ -57,6 +109,7 @@ Size 512 is in its own archive of 4.7 MB.
 The following table details the uncompressed size of each file:
 
 | File | Uncompressed Size |
+|------|-------------------|
 | pixels-size-32.pl  |   2.2 MB |
 | pixels-size-64.pl  |   8.9 MB |
 | pixels-size-128.pl |  36.0 MB |
@@ -97,51 +150,5 @@ pixels-size-128.pl
 pixels-size-256.pl
 pixels-size-512.pl
 pixels-size-p.pl
-```
-
-
-
-# How to run
-
-If you are on Linux (Ubuntu?) and installed SWI-Prolog through
-a Snap, you need to use one of these commands in a terminal to launch
-SWI-Prolog:
-```
-swi-prolog.swipl
-swi-prolog.swipl-win
-```
-The `swipl-win` will launch the GUI, and the other is for use in a
-terminal.
-
-To run non-interactively:
-```
-$ swi-prolog.swipl CoulAdj.pl pixel_values.pl results.tsv
-```
-
-To run a quick test of correctness:
-```
-$ swi-prolog.swipl CoulAdj.pl tests/knowledge-bases/pixels-size-p.pl tests/results/result-size-p.tsv
-```
-After running this command, check with git if there was a change in `tests/results/result-size-p.tsv`.
-If the file is still the same, your results should be correct.
-(I say "should", because this is just a quick test, and I'm only documenting
-it because right now, the Python script to check correctness isn't even written.)
-
-At the time of writing, in early development, we use this procedure to
-work on the project:
-
-## Ubuntu
-1. Open the repo in Visual Studio Code
-1. Open an integrated terminal in Visual Studio Code
-1. In this terminal, run the command `swi-prolog.swipl CoulAdj.pl sample-size-p.pl`.
-
-This command will launch SWI-Prolog in the terminal, after having loaded
-the main program and sample test data.
-
-Use this command in SWI-Prolog to reconsult files
-that changed:
-
-```Prolog
-?- make.
 ```
 
