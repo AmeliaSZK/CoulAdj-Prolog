@@ -1,4 +1,4 @@
-import subprocess, time, os.path
+import subprocess, time, os.path, filecmp
 
 swi_prolog_executable = "swi-prolog.swipl"
 couladj_prolog = "CoulAdj.pl"
@@ -20,6 +20,10 @@ subprocess.run(
     couladj_prolog, 
     pixels_path, 
     result_path]).check_returncode()
+
+is_correct = filecmp.cmp(golden_results, result_path, shallow=False)
+correctness_msg = "Correct" if is_correct else "INCORRECT"
+print(f"Size {size}", correctness_msg, sep="\t")
 
 
 
