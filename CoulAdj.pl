@@ -1,15 +1,23 @@
-:- initialization(coulAdj, main).
+:- initialization(go, main).
 
 :- use_module(library(clpfd)).
 
-coulAdj :- 
+go :-
     current_prolog_flag(argv, [TSV_filename]),
+    coulAdj(TSV_filename).
+
+coulAdj(TSV_file) :- 
     setof(
-        [Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2], 
+        [
+            [Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2],
+            [Red2, Gre2, Blu2, Alp2, Red1, Gre1, Blu1, Alp1]
+        ],
         is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2), 
-        AllAdjacencies
-    ), 
-    print_TSV_file(TSV_filename, AllAdjacencies).
+        DoubledAdjacencies
+    ),
+    append(DoubledAdjacencies, FlattenedAdjacencies),
+    sort(FlattenedAdjacencies, AllAdjacencies), % Removes duplicates
+    print_TSV_file(TSV_file, AllAdjacencies).
 
 is_adjColour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
     pixel(Row1, Col1, Red1, Gre1, Blu1, Alp1),
@@ -25,12 +33,12 @@ same_colour(Red1, Gre1, Blu1, Alp1, Red2, Gre2, Blu2, Alp2) :-
 
 is_neighbour(R1, C1, R2, C2) :-
     % Top
-    (R2 #= R1 - 1, C2 #= C1 - 1); % Left
-    (R2 #= R1 - 1, C2 #= C1    ); % Cent
-    (R2 #= R1 - 1, C2 #= C1 + 1); % Righ
+    %(R2 #= R1 - 1, C2 #= C1 - 1); % Left
+    %(R2 #= R1 - 1, C2 #= C1    ); % Cent
+    %(R2 #= R1 - 1, C2 #= C1 + 1); % Righ
 
     % Mid
-    (R2 #= R1    , C2 #= C1 - 1); % Left
+    %(R2 #= R1    , C2 #= C1 - 1); % Left
     (R2 #= R1    , C2 #= C1 + 1); % Righ
 
     % Bot
